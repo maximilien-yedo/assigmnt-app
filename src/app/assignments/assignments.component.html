@@ -1,0 +1,12 @@
+<p>Titre = {{titre}}</p>
+<div *ngFor="let assignment of assignments; let i=index"
+>
+  <p *ngIf="assignment.rendu; else nonsoumis" appRendu>
+    {{assignment.nom}} a été rendu
+     le {{assignment.dateDeRendu}}
+  </p>
+
+  <ng-template #nonsoumis>
+    <p>{{assignment.nom}} n'a pas été rendu !</p>
+  </ng-template>
+</div>

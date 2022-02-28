@@ -1,0 +1,10 @@
+.rendu
+{
+  color:green;
+}
+
+.nonRendu {
+  color:red;
+  border: 2px dashed orange;
+  background-color:lightgrey;
+}
