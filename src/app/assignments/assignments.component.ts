@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
 
 @Component({
@@ -14,28 +15,22 @@ export class AssignmentsComponent implements OnInit {
   assignmentSelectionne?:Assignment;
 
   titre = "Application de gestion des assignments !"
-  assignments:Assignment[] = [
-    {
-      nom:"Devoir angular pour Mr Buffa",
-      dateDeRendu: new Date("2022-03-01"),
-      rendu:false
-    },
-    {
-      nom:"Devoir Oracle pour Mr Mopolo",
-      dateDeRendu: new Date("2022-01-10"),
-      rendu:true
-    },
-    {
-      nom:"Devoir Grails pour Mr Galli",
-      dateDeRendu: new Date("2022-01-20"),
-      rendu:true
-    }
-  ]
+  assignments:Assignment[] = [];
 
-  constructor() {
+  constructor(private assignmentsService:AssignmentsService) {
+    //console.log("dans le constructeur")
   }
 
+  // appelé avant l'affichage
   ngOnInit(): void {
+    //console.log("dans le ngInit")
+    this.assignmentsService.getAssignments()
+    .subscribe(assignments => {
+      this.assignments = assignments;
+      //console.log("Données arrivées");
+    });
+
+    //console.log("assignmentsService.getAssignments() appelé...");
   }
 
   getColor(index:number) {
@@ -57,14 +52,22 @@ export class AssignmentsComponent implements OnInit {
   onDeleteAssignment(assignment:Assignment) {
     const pos = this.assignments.indexOf(assignment);
     this.assignments.splice(pos, 1);
-    
+
     // pour cacher la vue de details
     this.assignmentSelectionne = undefined;
 
   }
 
   onNouvelAssignment(assignment:Assignment) {
-    this.assignments.push(assignment);
-    this.formVisible = false;
+    //this.assignments.push(assignment);
+    this.assignmentsService.addAssignment(assignment)
+    .subscribe(message => {
+      console.log(message);
+
+      // on ne cache le formulaire et on ne re-affiche la liste que quand les données sont réellement
+      // ajoutées. Si passe par une requête ajax dans le cloud et une vraie BD, alors le seul endroit
+      // qui permet d'être sûr que les données ont été réellement ajoutées, c'est ici, dans le subscribe
+      this.formVisible = false;
+    })
   }
 }
