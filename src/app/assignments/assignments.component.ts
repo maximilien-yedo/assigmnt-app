@@ -7,9 +7,11 @@ import { Assignment } from './assignment.model';
   styleUrls: ['./assignments.component.css']
 })
 export class AssignmentsComponent implements OnInit {
-  // Champs du formulaire
-  nomAssignment = "";
-  dateDeRenduAssignment!:Date;
+  // pour afficher ou non le formulaire
+  formVisible = false;
+
+  // Pour envoie au composant de detail
+  assignmentSelectionne?:Assignment;
 
   titre = "Application de gestion des assignments !"
   assignments:Assignment[] = [
@@ -40,16 +42,20 @@ export class AssignmentsComponent implements OnInit {
     return index%2 ? 'red' : 'green'
   }
 
-  onSubmit() {
-    console.log(this.nomAssignment);
-    console.log(this.dateDeRenduAssignment);
 
-    let newAssignment = new Assignment();
-    newAssignment.nom = this.nomAssignment;
-    newAssignment.dateDeRendu = this.dateDeRenduAssignment;
-    newAssignment.rendu = false;
+  assignmentClique(assignment:Assignment) {
+    this.assignmentSelectionne = assignment;
+  }
 
-    this.assignments.push(newAssignment)
+  onAddAssignmentBtnClick() {
+    this.formVisible = true;
+    
+    // pour cacher la vue de details
+    this.assignmentSelectionne = undefined;
+  }
 
+  onNouvelAssignment(assignment:Assignment) {
+    this.assignments.push(assignment);
+    this.formVisible = false;
   }
 }
