@@ -29,4 +29,17 @@ export class AssignmentsService {
   getAssignments():Observable<Assignment[]> {
     return of(this.assignments);
   }
+
+  addAssignment(assignment:Assignment):Observable<string> {
+    this.assignments.push(assignment);
+
+    return of("Assignment ajouté");
+  }
+
+  updateAssignment(assignment:Assignment):Observable<string> {
+    // pour le moment rien besoin de faire... ca marche tel quel
+    // plus tard envoyer requête HTTP PUT sur web service pour update d'une base de données...
+
+    return of("Assignment Modifié");
+  }
 }
