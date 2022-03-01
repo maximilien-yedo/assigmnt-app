@@ -1,1 +1,16 @@
-<app-assignments></app-assignments>
+<h1>
+  <nav>
+    <a routerLink="/home">Application de gestion des assignments</a>&nbsp;
+      <div class="ajouterBtn">
+    <a routerLink="/add">
+      <button mat-flat-button color="accent" >
+        Ajouter assignment
+      </button>
+    </a>
+  </div>
+  </nav>
+</h1>
+<!--
+  La ligne suivante permet d'afficher le composant qui correspond à l'URL (en fonction des routes)
+-->
+<router-outlet></router-outlet>

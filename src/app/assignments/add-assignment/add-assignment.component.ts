@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
 
 @Component({
@@ -7,13 +8,11 @@ import { Assignment } from '../assignment.model';
   styleUrls: ['./add-assignment.component.css']
 })
 export class AddAssignmentComponent implements OnInit {
-  @Output() nouvelAssignment = new EventEmitter<Assignment>();
-
  // Champs du formulaire
  nomAssignment = "";
  dateDeRenduAssignment!:Date;
 
-  constructor() { }
+  constructor(private assignmentsService:AssignmentsService) { }
 
   ngOnInit(): void {
   }
@@ -23,15 +22,18 @@ export class AddAssignmentComponent implements OnInit {
     console.log(this.dateDeRenduAssignment);
 
     let newAssignment = new Assignment();
+    newAssignment.id = Math.round(Math.random()*1000000); // id entier entre 0 et 1M
     newAssignment.nom = this.nomAssignment;
     newAssignment.dateDeRendu = this.dateDeRenduAssignment;
     newAssignment.rendu = false;
 
-    //this.assignments.push(newAssignment)
-    // On doit envoyer le nouvel assignment au père pour que LUI, fasse l'ajout dans le
-    // tableau qui est définit dans son fichier typescript
+    this.assignmentsService.addAssignment(newAssignment)
+    .subscribe(message => {
+      console.log(message);
 
-    this.nouvelAssignment.emit(newAssignment);
+      // on doit naviguer vers l'URL qui affiche la liste ("" ou "/home")
+      // on doit naviguer par programme
+    })
   }
 
 }
