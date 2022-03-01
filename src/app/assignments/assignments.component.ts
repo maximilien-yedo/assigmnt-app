@@ -49,9 +49,18 @@ export class AssignmentsComponent implements OnInit {
 
   onAddAssignmentBtnClick() {
     this.formVisible = true;
+
+    // pour cacher la vue de details
+    this.assignmentSelectionne = undefined;
+  }
+
+  onDeleteAssignment(assignment:Assignment) {
+    const pos = this.assignments.indexOf(assignment);
+    this.assignments.splice(pos, 1);
     
     // pour cacher la vue de details
     this.assignmentSelectionne = undefined;
+
   }
 
   onNouvelAssignment(assignment:Assignment) {

@@ -9,3 +9,12 @@
   background-color:lightgrey;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.ajouterBtn {
+  margin-top: 30px;
+  align-self: flex-end;
+}
