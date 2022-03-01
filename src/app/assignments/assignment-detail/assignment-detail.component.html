@@ -6,6 +6,9 @@
     <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
       Rendu
     </mat-checkbox>
+
+    <button mat-raised-button color="primary" (click)="onClickEdit()">EDIT</button>
+
     <button mat-flat-button color="warn" (click)="onDeleteAssignment()">DELETE</button>
   </div>
 </mat-card>

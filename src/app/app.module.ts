@@ -23,6 +23,7 @@ import { AddAssignmentComponent } from './assignments/add-assignment/add-assignm
 
 // Pour le router
 import { Routes, RouterModule } from '@angular/router';
+import { EditAssignmentComponent } from './edit-assignment/edit-assignment.component';
 
 const routes:Routes = [
   {
@@ -40,6 +41,10 @@ const routes:Routes = [
   {
     path: "assignment/:id",
     component:AssignmentDetailComponent
+  },
+  {
+    path: "assignment/:id/edit",
+    component:EditAssignmentComponent
   }
 ]
 @NgModule({
@@ -48,7 +53,8 @@ const routes:Routes = [
     AssignmentsComponent,
     RenduDirective,
     AssignmentDetailComponent,
-    AddAssignmentComponent
+    AddAssignmentComponent,
+    EditAssignmentComponent
   ],
   imports: [
     BrowserModule,

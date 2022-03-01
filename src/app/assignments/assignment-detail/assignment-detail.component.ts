@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
 
@@ -12,7 +12,8 @@ export class AssignmentDetailComponent implements OnInit {
   assignmentTransmis?: Assignment;
 
   constructor(private assignmentsService: AssignmentsService,
-              private route:ActivatedRoute) {}
+              private route:ActivatedRoute,
+              private router:Router) {}
 
   ngOnInit(): void {
     // le + force la conversion "string" vers "number"
@@ -38,6 +39,9 @@ export class AssignmentDetailComponent implements OnInit {
 
           // pour cacher la vue de details une fois modifié
           this.assignmentTransmis = undefined;
+
+          // on retourne à la page d'accueil
+          this.router.navigate(["/home"]);
         });
     }
   }
@@ -51,7 +55,22 @@ export class AssignmentDetailComponent implements OnInit {
 
           // pour cacher la vue de details une fois supprimé
           this.assignmentTransmis = undefined;
+
+          // on retourne à la page d'accueil
+          this.router.navigate(["/home"]);
         });
     }
+  }
+
+  onClickEdit() {
+    this.router.navigate(['/assignment', this.assignmentTransmis?.id, 'edit'],
+    {
+      queryParams : {
+        nom:this.assignmentTransmis?.nom,
+        debug:true,
+        age:56
+      },
+      fragment:"edition"
+    });
   }
 }
