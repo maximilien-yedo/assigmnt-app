@@ -10,7 +10,7 @@ import { AuthService } from './shared/auth.service';
 })
 
 export class AppComponent {
-  title = 'Première application angular';
+  title = 'Première application angular sur heroku';
 
   constructor(private authService:AuthService,
     private router:Router,
