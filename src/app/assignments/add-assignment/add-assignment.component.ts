@@ -30,8 +30,8 @@ export class AddAssignmentComponent implements OnInit {
     newAssignment.rendu = false;
 
     this.assignmentsService.addAssignment(newAssignment)
-    .subscribe(message => {
-      console.log(message);
+    .subscribe(reponse => {
+      console.log(reponse.message);
 
       // on doit naviguer vers l'URL qui affiche la liste ("" ou "/home")
       // on doit naviguer par programme

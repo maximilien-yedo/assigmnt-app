@@ -36,8 +36,8 @@ export class AssignmentDetailComponent implements OnInit {
 
       this.assignmentsService
         .updateAssignment(this.assignmentTransmis)
-        .subscribe((message) => {
-          console.log(message);
+        .subscribe((reponse) => {
+          console.log(reponse.message);
 
           // pour cacher la vue de details une fois modifié
           this.assignmentTransmis = undefined;
@@ -52,8 +52,8 @@ export class AssignmentDetailComponent implements OnInit {
     if (this.assignmentTransmis) {
       this.assignmentsService
         .deleteAssignment(this.assignmentTransmis)
-        .subscribe((message) => {
-          console.log(message);
+        .subscribe((reponse) => {
+          console.log(reponse.message);
 
           // pour cacher la vue de details une fois supprimé
           this.assignmentTransmis = undefined;
