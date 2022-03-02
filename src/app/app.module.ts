@@ -16,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { FormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http';
 
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { RenduDirective } from './shared/rendu.directive';
@@ -65,7 +66,7 @@ const routes:Routes = [
     MatButtonModule, MatDividerModule, MatIconModule,
     FormsModule, MatInputModule, MatFormFieldModule, MatDatepickerModule,
     MatListModule, MatCardModule, MatCheckboxModule,
-    MatNativeDateModule, MatSlideToggleModule,
+    MatNativeDateModule, MatSlideToggleModule, HttpClientModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
