@@ -14,6 +14,7 @@ import { MatFormFieldModule }  from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatTableModule} from '@angular/material/table';
 
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
@@ -65,7 +66,7 @@ const routes:Routes = [
     BrowserAnimationsModule,
     MatButtonModule, MatDividerModule, MatIconModule,
     FormsModule, MatInputModule, MatFormFieldModule, MatDatepickerModule,
-    MatListModule, MatCardModule, MatCheckboxModule,
+    MatListModule, MatCardModule, MatCheckboxModule, MatTableModule,
     MatNativeDateModule, MatSlideToggleModule, HttpClientModule,
     RouterModule.forRoot(routes)
   ],

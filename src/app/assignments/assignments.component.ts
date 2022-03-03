@@ -10,6 +10,18 @@ import { Assignment } from './assignment.model';
 export class AssignmentsComponent implements OnInit {
   titre = 'Application de gestion des assignments !';
   assignments: Assignment[] = [];
+  displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'rendu'];
+
+  // pour la pagination
+  page: number=1;
+  limit: number=5;
+  totalDocs: number=0;
+  totalPages: number=0;
+  hasPrevPage?: boolean;
+  prevPage?: number;
+  hasNextPage?: boolean;
+  nextPage?: number;
+
 
   constructor(private assignmentsService: AssignmentsService) {
     //console.log("dans le constructeur")
@@ -18,16 +30,48 @@ export class AssignmentsComponent implements OnInit {
   // appelé avant l'affichage
   ngOnInit(): void {
     //console.log("dans le ngInit")
-    this.assignmentsService.getAssignments().subscribe((assignments) => {
-      this.assignments = assignments;
+
+    this.getAssignments();
+    //console.log("assignmentsService.getAssignments() appelé...");
+  }
+
+  getAssignments() {
+    this.assignmentsService.getAssignments(this.page, this.limit)
+    .subscribe((data) => {
+      this.assignments = data.docs;
+      this.page = data.page;
+      this.limit = data.limit;
+      this.totalDocs = data.totalDocs;
+      this.totalPages = data.totalPages;
+      this.hasPrevPage = data.hasPrevPage;
+      this.prevPage = data.prevPage;
+      this.hasNextPage = data.hasNextPage;
+      this.nextPage = data.nextPage;
       //console.log("Données arrivées");
     });
-
-    //console.log("assignmentsService.getAssignments() appelé...");
   }
 
   getColor(index: number) {
     return index % 2 ? 'red' : 'green';
   }
 
+  pageSuivante() {
+    this.page++;
+    this.getAssignments();
+  }
+
+  pagePrecedente() {
+      this.page--;
+      this.getAssignments();
+  }
+
+  premierePage() {
+    this.page = 1;
+    this.getAssignments();
+  }
+
+  dernierePage() {
+    this.page = this.totalPages;
+    this.getAssignments();
+  }
 }
