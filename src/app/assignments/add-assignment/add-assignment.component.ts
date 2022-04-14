@@ -9,9 +9,9 @@ import { Assignment } from '../assignment.model';
   styleUrls: ['./add-assignment.component.css']
 })
 export class AddAssignmentComponent implements OnInit {
- // Champs du formulaire
- nomAssignment = "";
- dateDeRenduAssignment!:Date;
+  // Champs du formulaire
+  nomAssignment = "";
+  dateDeRenduAssignment!:Date;
 
   constructor(private assignmentsService:AssignmentsService,
               private router:Router) { }

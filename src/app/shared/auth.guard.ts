@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     // ici on utilise le service qui renvoie une promesse qui dit si on est admin ou pas
-    return this.authService.isAdmin()
+    return this.authService.islogged()
     .then((admin):boolean => {
       if(admin) {
         console.log("Je suis un bon gardien, j'autorise la navigation")

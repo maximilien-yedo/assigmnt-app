@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
-import { AuthService } from 'src/app/shared/auth.service';
 import { Assignment } from '../assignment.model';
+import { AuthService } from '../../shared/auth.service'
+
 
 @Component({
   selector: 'app-assignment-detail',
@@ -10,14 +11,25 @@ import { Assignment } from '../assignment.model';
   styleUrls: ['./assignment-detail.component.css'],
 })
 export class AssignmentDetailComponent implements OnInit {
-  assignmentTransmis?: Assignment;
 
-  constructor(private assignmentsService: AssignmentsService,
-              private route:ActivatedRoute,
-              private router:Router,
-              private authService:AuthService) {}
+  assignmentTransmis?: Assignment;
+  logIn: any;
+  admin:any;
+
+  constructor(
+    private assignmentsService: AssignmentsService,
+    private route:ActivatedRoute,
+    private router:Router,
+    private authService:AuthService
+  ) {}
 
   ngOnInit(): void {
+    this.authService.loggedIn.subscribe((bool : boolean)=> {
+      this.logIn = bool;
+    })
+    this.authService.admin.subscribe((Admin : boolean)=> {
+      this.admin = Admin;
+    })
     // le + force la conversion "string" vers "number"
     const id:number = +this.route.snapshot.params['id'];
 
@@ -49,22 +61,25 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   onDeleteAssignment() {
-    if (this.assignmentTransmis) {
-      this.assignmentsService
-        .deleteAssignment(this.assignmentTransmis)
-        .subscribe((reponse) => {
-          console.log(reponse.message);
+    if (this.admin==true) {
+      if (this.assignmentTransmis) {
+        this.assignmentsService
+          .deleteAssignment(this.assignmentTransmis)
+          .subscribe((reponse) => {
+            console.log(reponse.message);
 
-          // pour cacher la vue de details une fois supprimé
-          this.assignmentTransmis = undefined;
+            // pour cacher la vue de details une fois supprimé
+            this.assignmentTransmis = undefined;
 
-          // on retourne à la page d'accueil
-          this.router.navigate(["/home"]);
-        });
+            // on retourne à la page d'accueil
+            this.router.navigate(["/home"]);
+          });
+      }
     }
   }
 
   onClickEdit() {
+
     this.router.navigate(['/assignment', this.assignmentTransmis?.id, 'edit'],
     {
       queryParams : {
@@ -76,7 +91,10 @@ export class AssignmentDetailComponent implements OnInit {
     });
   }
 
-  isAdmin():boolean {
-    return this.authService.loggedIn;
+  islogged() {
+    return this.logIn;
+  }
+  isAdmin(){
+     return this.admin
   }
 }

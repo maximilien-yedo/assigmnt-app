@@ -1,0 +1,81 @@
+<!-- header start -->
+<header [ngStyle]="{'margin.px':-40, 'width.px':'auto'} ">
+  <!-- header top start -->
+  <div class="header-top theme1 bg-dark py-15">
+      <div class="container">
+          <div class="row align-items-center">
+              <div class="col-lg-6 col-md-7 order-last order-md-first">
+                  <div class="static-info text-center text-md-left"></div>
+              </div>
+              <div *ngIf="logIn" class="col-lg-6 col-md-5">
+                  <nav  class="navbar-top pb-2 pb-md-0 position-relative">
+                      <ul class="d-flex justify-content-center justify-content-md-end align-items-center">
+                          <li *ngIf="logIn"> Connecté</li>
+                          <li *ngIf="!logIn">deconnecté</li>
+                      </ul>
+                  </nav>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- header top end -->
+  <!-- header-middle satrt -->
+  <div class="header-middle pt-20">
+      <div class="container">
+          <div class="row align-items-center">
+              <div class="col-sm-6 col-lg-2 order-first">
+                  <div class="logo text-center text-sm-left mb-30 mb-sm-0">
+                      <a routerLink="/home"><img src="assets/img/logo.png" alt="logo"></a>
+                  </div>
+              </div>
+
+              <div class="col-sm-6 col-lg-5 col-xl-4">
+                  <!-- search-form end -->
+                  <div class="d-flex align-items-center justify-content-center justify-content-sm-end">
+                      <div class="media static-media mr-50 d-none d-lg-flex">
+                          <div class="media-body">
+                              <div class="phone">
+                                  <span class="text-muted">Contactez-nous:</span>
+                              </div>
+                              <div class="phone">
+                                  <a href="tel:(+225)0759715506" class="text-dark">+225 0759715506</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-5 col-xl-6 order-lg-first">
+                  <div class="search-form pt-30 pt-lg-0">
+                                          <!-- header bottom start -->
+  <nav class="header-bottom theme1 d-none d-lg-block">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-10 offset-lg-2 d-flex flex-wrap align-items-center position-relative">
+
+                <ul class="main-menu d-flex">
+
+                  <li routerLinkActive="active"><a routerLink="/">Accueil</a></li>
+
+                  <li routerLinkActive="active"><a routerLink="/assignements">Assignements</a></li>
+
+                  <li *ngIf="!logIn" routerLinkActive="active" ><a routerLink="/login">Login</a></li>
+                  <li *ngIf="!logIn" routerLinkActive="active" ><a  routerLink="/signup">Register</a></li>
+                  <li *ngIf="logIn" ><a (click)="logout()"  style="color: black;cursor: pointer;">Logout</a></li>
+                  <button [disabled]="!logIn" style="float: right;" mat-raised-button color="primary" (click)="peuplerBD()">Peuplet BD</button>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- header bottom end -->
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- header-middle end -->
+
+  <!-- header bottom start -->
+
+</header>

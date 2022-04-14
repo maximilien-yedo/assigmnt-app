@@ -1,5 +1,17 @@
-<div class="container" *ngIf="assignment">
-  <h1>Edition de l'assignment {{assignment.nom}}</h1>
+<div style="margin-top:50px;" class="container" *ngIf="assignment">
+  <h1>Edition de l'assignment {{assignment.id}}</h1>
+  <div class="col-lg-12 mb-5 mb-lg-0">
+    <div class="position-relative">
+        <span class="badge badge-danger top-right">edit</span>
+    </div>
+    <div class="product-sync-init mb-20">
+        <div class="single-product">
+            <div class="product-thumb">
+                <img width="3000" height="200" src="assets/img/pexels-pixabay-267586.jpg" alt="product-thumb">
+            </div>
+        </div>
+    </div>
+  </div>
   <form ngForm class="form">
     <mat-form-field>
       <input matInput placeholder="Edition du nom" [(ngModel)]="nomAssignment" name="assignment-name">

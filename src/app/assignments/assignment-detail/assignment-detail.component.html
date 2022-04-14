@@ -1,13 +1,27 @@
-<h3>Dans le detail</h3>
+
+
+<h3 style="margin-top: 20px;">Dans le detail</h3>
+<div class="col-lg-12 mb-5 mb-lg-0">
+  <div class="position-relative">
+      <span class="badge badge-danger top-right">edit</span>
+  </div>
+  <div class="product-sync-init mb-20">
+      <div class="single-product">
+          <div class="product-thumb">
+              <img width="3000" height="200" src="assets/img/pexels-pixabay-267586.jpg" alt="product-thumb">
+          </div>
+      </div>
+  </div>
+</div>
 <mat-card *ngIf="assignmentTransmis">
   <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
   <mat-card-subtitle>{{assignmentTransmis?.dateDeRendu | date}}</mat-card-subtitle>
-  <div id="bottom">
-    <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
+  <div id="bottom" [ngClass]="{connecter:islogged(), nc:!islogged()}">
+    <mat-checkbox *ngIf="!assignmentTransmis.rendu"  (click)="onAssignmentRendu()">
       Rendu
     </mat-checkbox>
 
-    <button mat-raised-button color="primary" [disabled]="!isAdmin()" (click)="onClickEdit()">EDIT</button>
+    <button mat-raised-button color="primary" [disabled]="!islogged()" (click)="onClickEdit()">EDIT</button>
 
     <button mat-flat-button color="warn" [disabled]="!isAdmin()" (click)="onDeleteAssignment()">DELETE</button>
   </div>
